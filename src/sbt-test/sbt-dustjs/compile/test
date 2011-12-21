@@ -1,0 +1,4 @@
+# check the output of the file
+> dust
+$ exists target/scala-2.9.1/resource_managed/main/js/hello.js
+> contents target/scala-2.9.1/resource_managed/main/js/hello.js fixtures/hello.js
