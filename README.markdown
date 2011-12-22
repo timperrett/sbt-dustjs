@@ -1,7 +1,7 @@
 SBT dust.js
 ===========
 
-This plugin is a pre-compiler for the client-side templating system [dust.js]("http://akdubya.github.com/dustjs/"). The plugin builds your dust templates into javascript files that you can then include into your markup pages. For those who arn't familiar, dust.js recently achieved fame on the [linkedin engineering blog]("http://engineering.linkedin.com/frontend/leaving-jsps-dust-moving-linkedin-dustjs-client-side-templates")
+This plugin is a pre-compiler for the client-side templating system [dust.js](http://akdubya.github.com/dustjs/). The plugin builds your dust templates into javascript files that you can then include into your markup pages. For those who arn't familiar, dust.js recently achieved fame on the [linkedin engineering blog](http://engineering.linkedin.com/frontend/leaving-jsps-dust-moving-linkedin-dustjs-client-side-templates)
 
 If you have a lot of templates, then you might want to considering merging them into a single file as an optimisation, but that is out of the scope of this plugin which is currently only concerned with template compilation. 
 
