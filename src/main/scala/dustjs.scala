@@ -18,6 +18,12 @@ object DustJsPlugin extends sbt.Plugin {
         sourceDir.descendentsExcept(incl, excl).get
     }
   
+  private def dustCleanTask = (streams, resourceManaged in dust) map {
+    (out, target) =>
+      out.log.info("Cleaning generated JavaScript under " + target)
+      IO.delete(target)
+    }
+  
   /** compile task **/
   
   private def toOutputPath(fromDir: File, template: File, targetDir: File) = 
@@ -66,6 +72,7 @@ object DustJsPlugin extends sbt.Plugin {
     include in dust := "*.dust",
     exclude in Global := (".*" - ".") || HiddenFileFilter,
     unmanagedSources in dust <<= dustSourcesTask,
+    clean in dust <<= dustCleanTask,
     dust <<= dustCompileTask
   )
   
