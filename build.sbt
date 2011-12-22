@@ -12,3 +12,7 @@ scalacOptions += "-deprecation"
 
 // sbt test framework
 seq(ScriptedPlugin.scriptedSettings: _*)
+
+// disable the buffer for scripted
+// so that the output shows in the console
+scriptedBufferLog := false

@@ -39,22 +39,17 @@ object DustJsPlugin extends sbt.Plugin {
     
   private def compiledTo(location: File) = (location ** "*.js").get
   
-  def dustCompileTask = (streams, sourceDirectory in dust, resourceManaged in dust, 
-    include in dust, exclude in dust) map { 
-      (out, sourceDir, targetDir, incl, excl) => 
-        (for {
-          templatePath <- sourceDir.descendentsExcept(incl, excl).get
-          jsPath <- toOutputPath(sourceDir, templatePath, targetDir) 
-        } yield (templatePath, jsPath)) match {
-          case Nil => 
-            out.log.info("No dust templates to compile")
-            compiledTo(targetDir)
-          case files => 
-            files.map { case (template, output) => 
-              compile(template, output, out.log)
-            }
-            compiledTo(targetDir)
-        }
+  def dustCompileTask = (streams, sourceDirectory in dust, resourceManaged in dust,
+    include in dust, exclude in dust, cacheDirectory in dust) map {
+      (out, sourceDir, targetDir, incl, excl, cache) => {
+        FileFunction.cached(cache / "dust", FilesInfo.lastModified, FilesInfo.exists){ _ =>
+          (for {
+            template <- sourceDir.descendentsExcept(incl, excl).get
+            output <- toOutputPath(sourceDir, template, targetDir)
+          } yield compile(template, output, out.log)).toSet
+        }(Set(sourceDir))
+        compiledTo(targetDir)
+      }
     }
   
   /** Settings Delivery **/
