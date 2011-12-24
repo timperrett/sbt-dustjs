@@ -4,13 +4,11 @@ $ exists target/scala-2.9.1/resource_managed/main/js/hello.js
 > contents target/scala-2.9.1/resource_managed/main/js/hello.js fixtures/hello.js
 # try running compile again (with no source file change it should be skipped)
 > dust
-> contents target/scala-2.9.1/resource_managed/main/js/hello.js fixtures/hello.js
-# remove the original and substitute it with an altered source to force-recompilation
-$ delete src/main/dust/hello.dust
+# update the file
 $ copy-file fixtures/hello2.dust src/main/dust/hello.dust
+$ newer src/main/dust/hello.dust target/scala-2.9.1/resource_managed/main/js/hello.js
+$ sleep 1
 > dust
 # compare the recompiled source with the alliterated fixture
 > contents target/scala-2.9.1/resource_managed/main/js/hello.js fixtures/hello2.js
-# do a clean and check that the file has been blown away
-> clean
--$ exists target/scala-2.9.1/resource_managed/main/js/hello.js
+$ pause

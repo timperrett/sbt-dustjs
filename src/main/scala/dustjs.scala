@@ -29,32 +29,53 @@ object DustJsPlugin extends sbt.Plugin {
   private def toOutputPath(fromDir: File, template: File, targetDir: File) = 
     Some(new File(targetDir, IO.relativize(fromDir, template).get.replace(".dust",".js")))
   
-  private def compile(dust: File, js: File, log: Logger) = 
+  private def compile(input: File, output: File, log: Logger) = {
+    // IO.delete(output)
     try {
-      Compiler().compile(io.Source.fromFile(dust).mkString, js.name.replace(".js","")).fold(
+      Compiler().compile(io.Source.fromFile(input).mkString, output.name.replace(".js","")).fold(
         error => sys.error(error),
         compiled => {
-          IO.write(js, compiled)
-          log.debug("Wrote to file %s" format js)
-          js
+          IO.write(output, compiled)
+          log.debug("Wrote to file %s" format output)
+          output
       })
     } catch {
       case e: Exception => 
         sys.error("Unexpected error whilst compilling dust template")
     }
+  }
     
-  private def compiledTo(location: File) = (location ** "*.js").get
+  def compileChanged(sources: File, target: File, cache: File,
+    incl: FileFilter, excl: FileFilter, log: Logger) =
+    (for {
+      template <- sources.descendentsExcept(incl, excl).get
+      output <- toOutputPath(sources, template, target) if (template newerThan output)
+    } yield (template, output)) match {
+        case Nil =>
+          log.debug("No dust.js templates to compile")
+          compiled(target)
+        case xs =>
+          log.info("Compiling %d dust.js templates to %s" format(xs.size, target))
+          xs map { case (in,out) => 
+            compile(in,out,log)
+          }
+          compiled(target)
+      }
+    // not sure why this doesnt work... need to find out.
+    // FileFunction.cached(cache / "dust", FilesInfo.hash){ input =>
+    //   (for {
+    //     template <- input.descendentsExcept(incl, excl).get
+    //     output <- toOutputPath(sources, template, target)
+    //   } yield compile(template, output, log)).toSet
+    // }
+  
+  def compiled(location: File) = (location ** "*.js").get
   
   def dustCompileTask = (streams, sourceDirectory in dust, resourceManaged in dust,
     include in dust, exclude in dust, cacheDirectory in dust) map {
-      (out, sourceDir, targetDir, incl, excl, cache) => {
-        FileFunction.cached(cache / "dust", FilesInfo.lastModified, FilesInfo.exists){ _ =>
-          (for {
-            template <- sourceDir.descendentsExcept(incl, excl).get
-            output <- toOutputPath(sourceDir, template, targetDir)
-          } yield compile(template, output, out.log)).toSet
-        }(Set(sourceDir))
-        compiledTo(targetDir)
+      (out, sources, targetDir, incl, excl, cache) => {
+        out.log.info("Compiling dust templates")
+        compileChanged(sources, targetDir, cache, incl, excl, out.log)
       }
     }
   
