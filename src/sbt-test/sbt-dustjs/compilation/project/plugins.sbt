@@ -1,1 +1,1 @@
-addSbtPlugin("eu.getintheloop" % "sbt-dustjs" % "0.0.1-SNAPSHOT")
+addSbtPlugin("eu.getintheloop" % "sbt-dustjs" % "0.0.2-SNAPSHOT")

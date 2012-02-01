@@ -4,7 +4,7 @@ name := "sbt-dustjs"
 
 organization := "eu.getintheloop"
 
-version := "0.0.1-SNAPSHOT"
+version := "0.0.2-SNAPSHOT"
 
 libraryDependencies += "rhino" % "js" % "1.7R2"
 
