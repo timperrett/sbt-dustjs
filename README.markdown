@@ -14,4 +14,21 @@ The plugin is currently unpublished and very alpha. With that in mind you need t
   addSbtPlugin("eu.getintheloop" % "sbt-dustjs" % "0.0.1-SNAPSHOT")
 </code></pre>
 
+And then add the settings in a build.sbt:
+
+<pre><code>
+import dustjs.DustJsPlugin
+
+seq(DustJsPlugin.dustSettings: _*)
+</code></pre>
+
+
+or in an SBT "full configuration" something like:
+
+<pre><code>
+settings = DustJsPlugin.dustSettings
+</code></pre>
+
+
+
 With the plugin added, you just need to place your dust templates in src/main/dust and then invoke <code>dust</code> from the SBT 11.x shell.
