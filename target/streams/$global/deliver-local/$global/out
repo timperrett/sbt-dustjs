@@ -1,5 +1,0 @@
-[0m[[0minfo[0m] [0m:: delivering :: eu.getintheloop#sbt-dustjs;0.0.3-SNAPSHOT :: 0.0.3-SNAPSHOT :: release :: Fri Feb 10 17:56:39 GMT 2012[0m
-[0m[[0mdebug[0m] [0m	options = status=release pubdate=Fri Feb 10 17:56:39 GMT 2012 validate=true resolveDynamicRevisions=true merge=true resolveId=null pubBranch=null[0m
-[0m[[0mdebug[0m] [0mpost 1.3 ivy file: using exact as default matcher[0m
-[0m[[0minfo[0m] [0m	delivering ivy file to /Users/timperrett/repositories/sbt/sbt-dustjs/target/scala-2.9.1/sbt-0.11.2/ivy-0.0.3-SNAPSHOT.xml[0m
-[0m[[0mdebug[0m] [0m	deliver done (21ms)[0m
