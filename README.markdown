@@ -11,7 +11,14 @@ Usage
 The plugin is currently unpublished and very alpha. With that in mind you need to build from source... like a boss! Once you've done this and <code>publish-local</code>'d you can add it to a project in project/plugins.sbt like so:
 
 <pre><code>
-  addSbtPlugin("eu.getintheloop" % "sbt-dustjs" % "0.0.1-SNAPSHOT")
+resolvers += Resolver.url("sbt-plugin-releases", 
+  new URL("http://scalasbt.artifactoryonline.com/scalasbt/sbt-plugin-releases/")
+    )(Resolver.ivyStylePatterns)
+
+addSbtPlugin("eu.getintheloop" % "sbt-dustjs" % "0.0.3")
+
 </code></pre>
 
 With the plugin added, you just need to place your dust templates in src/main/dust and then invoke <code>dust</code> from the SBT 11.x shell.
+
+
