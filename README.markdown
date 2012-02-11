@@ -19,7 +19,7 @@ addSbtPlugin("eu.getintheloop" % "sbt-dustjs" % "0.0.3")
 
 </code></pre>
 
-With the plugin added, you just need to place your dust templates in src/main/dust and then invoke <code>dust</code> from the SBT 11.x shell. Likewise, any call to <code>compile</compile> should also trigger altered dust templates to be recompiled. 
+With the plugin added, you just need to place your dust templates in src/main/dust and then invoke <code>dust</code> from the SBT 11.x shell. Likewise, any call to <code>compile</code> should also trigger altered dust templates to be recompiled. 
 
 If you want to publish the dust templates to somewhere other than the default managed resource file location, do something like this in your build.sbt file:
 
