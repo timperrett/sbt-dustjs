@@ -24,8 +24,8 @@ With the plugin added, you just need to place your dust templates in src/main/du
 If you want to publish the dust templates to somewhere other than the default managed resource file location, do something like this in your build.sbt file:
 
 <pre><code>
-(resourceManaged in (Compile, DustKeys.dust)) <<= (sourceDirectory in Compile){
-    _ / "resources" / "www" / "js" / "templates"
+(resourceManaged in (Compile, DustKeys.dust)) &lt;&lt;= (sourceDirectory in Compile){
+    _ / &quot;resources&quot; / &quot;www&quot; / &quot;js&quot; / &quot;templates&quot;
 }
 
 </code></pre>
