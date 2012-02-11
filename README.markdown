@@ -8,7 +8,7 @@ If you have a lot of templates, then you might want to considering merging them 
 Usage
 -----
 
-The plugin is currently unpublished and very alpha. With that in mind you need to build from source... like a boss! Once you've done this and <code>publish-local</code>'d you can add it to a project in project/plugins.sbt like so:
+Add the following to your project/plugins.sbt file:
 
 <pre><code>
 resolvers += Resolver.url("sbt-plugin-releases", 
@@ -19,6 +19,15 @@ addSbtPlugin("eu.getintheloop" % "sbt-dustjs" % "0.0.3")
 
 </code></pre>
 
-With the plugin added, you just need to place your dust templates in src/main/dust and then invoke <code>dust</code> from the SBT 11.x shell.
+With the plugin added, you just need to place your dust templates in src/main/dust and then invoke <code>dust</code> from the SBT 11.x shell. Likewise, any call to <code>compile</compile> should also trigger altered dust templates to be recompiled. 
+
+If you want to publish the dust templates to somewhere other than the default managed resource file location, do something like this in your build.sbt file:
+
+<pre><code>
+(resourceManaged in (Compile, DustKeys.dust)) <<= (sourceDirectory in Compile){
+    _ / "resources" / "www" / "js" / "templates"
+}
+
+</code></pre>
 
 
