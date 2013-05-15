@@ -8,6 +8,8 @@ If you have a lot of templates, then you might want to considering merging them 
 Usage
 -----
 
+for scala 2.9.1 and sbt 0.11
+
 Add the following to your project/plugins.sbt file:
 
 <pre><code>
@@ -16,8 +18,18 @@ resolvers += Resolver.url("sbt-plugin-releases",
     )(Resolver.ivyStylePatterns)
 
 addSbtPlugin("eu.getintheloop" % "sbt-dustjs" % "0.0.3")
-
 </code></pre>
+
+for scala 2.9.2 and sbt 0.12, there is no published version, so you can build and publish locally
+
+clone this project and type, use sbt publish-local to publish a locally.
+
+Add the following to your project/plugins.sbt file:
+
+<pre><code>
+addSbtPlugin("eu.getintheloop" %% "sbt-dustjs" % "0.0.4-SNAPSHOT")
+</code></pre>
+
 
 Then stuff this line onto the end of your build.sbt:
 
