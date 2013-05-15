@@ -10,7 +10,7 @@ libraryDependencies += "rhino" % "js" % "1.7R2"
 
 scalacOptions += "-deprecation"
 
-scalaVersion  := "2.10.0"
+scalaVersion  := "2.9.2"
 
 // publishing
 publishTo := Some(Resolver.url("sbt-plugin-releases", 
