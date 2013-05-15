@@ -15,7 +15,16 @@ resolvers += Resolver.url("sbt-plugin-releases",
   new URL("http://scalasbt.artifactoryonline.com/scalasbt/sbt-plugin-releases/")
     )(Resolver.ivyStylePatterns)
 
+for scala 2.9.1 and sbt 0.11
+
 addSbtPlugin("eu.getintheloop" % "sbt-dustjs" % "0.0.3")
+
+for scala 2.9.2 and sbt 0.12, there is no published version, so you can build and publish locally
+
+clone this project and type, use sbt publish-local to publish a local copy
+
+addSbtPlugin("eu.getintheloop" %% "sbt-dustjs" % "0.0.4-SNAPSHOT")
+
 
 </code></pre>
 
